@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose Day & Valentine ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  height: 100vh;
+  overflow-x: hidden;
+  color: white;
+}
+
+/* Sections */
+section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  animation: pop 1.5s infinite alternate;
+}
+
+p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  opacity: 0.95;
+}
+
+/* Rose */
+.rose {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff8fa3, #c9184a);
+  margin-bottom: 25px;
+  animation: bloom 4s ease-in-out infinite;
+}
+
+@keyframes bloom {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(0.9); }
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp linear forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+/* Heart photo animation */
+.heart-container {
+  position: relative;
+  width: 320px;
+  height: 280px;
+  margin-top: 30px;
+}
+
+.heart-container img {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  opacity: 0;
+  animation: photoIn 1.5s ease forwards;
+}
+
+@keyframes photoIn {
+  to {
+    opacity: 1;
+    transform: translate(0,0);
+  }
+}
+
+/* Button */
+button {
+  margin-top: 30px;
+  background: #ff2e63;
+  border: none;
+  padding: 14px 35px;
+  border-radius: 30px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_1f5fa12b94.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🌹 Rose Day -->
+<section>
+  <div class="rose"></div>
+  <h1>Happy Rose Day 🌹</h1>
+  <p>A rose for you, to express what words cannot.</p>
+</section>
+
+<!-- ❤️ Valentine -->
+<section>
+  <h1>Happy Valentine’s Day ❤️</h1>
+  <p>Every heartbeat, every rose, every moment — with you.</p>
+
+  <div class="heart-container" id="heart"></div>
+
+  <button onclick="burstLove()">Send Love 💕</button>
+</section>
+
+<script>
+/* Floating hearts */
+function burstLove() {
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = 3 + Math.random() * 3 + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+}
+
+/* Auto hearts */
+setInterval(burstLove, 2000);
+
+/* Heart photo formation */
+const heart = document.getElementById('heart');
+
+const positions = [
+  [120,0],[200,40],[240,90],[200,150],
+  [120,210],[40,150],[0,90],[40,40]
+];
+
+positions.forEach((pos, i) => {
+  const img = document.createElement('img');
+  img.src = 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e';
+  img.style.left = pos[0] + 'px';
+  img.style.top = pos[1] + 'px';
+  img.style.transform =
+    `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;
+  img.style.animationDelay = i * 0.3 + 's';
+  heart.appendChild(img);
+});
+</script>
+
+</body>
+</html>

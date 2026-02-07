@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose Day / Valentine 🌹</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #ffdde1, #ee9ca7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Card */
+.card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  border-radius: 25px;
+  padding: 45px 55px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  animation: fadeIn 2s ease;
+}
+
+/* 🌹 Single Rose on Load */
+.rose {
+  width: 180px;
+  margin: 0 auto 25px;
+  animation: bloom 3s ease-in-out infinite alternate;
+}
+
+.rose img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 20px 35px rgba(179, 0, 45, 0.45);
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #b3002d;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #5a0015;
+  margin-bottom: 30px;
+}
+
+button {
+  background: #b3002d;
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff004c;
+  transform: scale(1.1);
+}
+
+/* 🌸 Falling Petals (IMAGE BASED) */
+.petal {
+  position: fixed;
+  top: -40px;
+  width: 26px;
+  height: 26px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bloom {
+  from { transform: scale(0.95); }
+  to { transform: scale(1.07); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <!-- 🌹 Single Rose -->
+  <div class="rose">
+    <img src="https://static.vecteezy.com/system/resources/previews/035/386/664/large_2x/red-roses-hand-drawn-color-set-black-line-rose-flowers-isolated-on-white-background-colored-elements-illustration-for-happy-valentines-day-postcards-free-vector.jpg" alt="Single Rose">
+  </div>
+
+  <h1>For You Taklu</h1>
+  <p>A single rose to start, a shower of petals to follow.</p>
+
+  <button onclick="dropPetals()">Shower with Love 💕</button>
+</div>
+
+<script>
+/* 🌸 Multiple Petal Images */
+const petalImages = [
+  "./assets/Asset1.png",
+  "./assets/Asset2.png",
+  "./assets/Asset3.png",
+  "./assets/Asset4.png",
+  "./assets/Asset5.png",
+  "./assets/Asset6.png",
+  "./assets/Asset7.png",
+  "./assets/Asset8.png",
+  "./assets/Asset9.png"
+];
+
+function dropPetals() {
+  for (let i = 0; i < 40; i++) {
+    createPetal();
+  }
+}
+
+function createPetal() {
+  const petal = document.createElement('div');
+  petal.className = 'petal';
+
+  const img = petalImages[Math.floor(Math.random() * petalImages.length)];
+  petal.style.backgroundImage = `url(${img})`;
+
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.animationDuration = Math.random() * 3 + 3 + 's';
+  petal.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random()*0.5 + 0.7})`;
+
+  document.body.appendChild(petal);
+
+  setTimeout(() => petal.remove(), 7000);
+}
+</script>
+
+</body>
+</html>

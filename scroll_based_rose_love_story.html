@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rose Day – Scroll Love Story 🌹</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #0b132b;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 1s ease;
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 1.2s ease;
+    }
+
+    section.active h1,
+    section.active p,
+    section.active .photo-frame {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Rose bloom */
+    .rose {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ff8fa3, #c9184a);
+      margin-bottom: 20px;
+      transform: scale(0);
+      transition: transform 1.5s ease;
+    }
+
+    section.active .rose {
+      transform: scale(1);
+    }
+
+    /* Couple photo */
+    .photo-frame {
+      width: 260px;
+      height: 320px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 25px 0;
+      opacity: 0;
+      transform: translateY(40px) scale(0.9);
+      transition: 1.4s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      border: 4px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.95);
+    }
+
+    /* Petals */
+    .petal {
+      position: fixed;
+      top: -20px;
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle, #ff6f91, #c9184a);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Backgrounds */
+    .scene1 { background: linear-gradient(#fff1f3, #ffd6e0); color: #700018; }
+    .scene2 { background: linear-gradient(#ff758f, #c9184a); }
+    .scene3 { background: linear-gradient(#1c2541, #0b132b); }
+    .scene4 { background: radial-gradient(circle, #ff8fab, #3a0ca3); }
+  </style>
+</head>
+<body>
+
+  <section class="scene1">
+    <div class="rose"></div>
+    <div class="photo-frame">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Couple" />
+    </div>
+    <h1>The First Rose 🌹</h1>
+    <p>It all began with a single rose, and two hearts finding each other.</p>
+  </section>
+
+  <section class="scene2">
+    <div class="rose"></div>
+    <div class="photo-frame">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1" alt="Couple in Love" />
+    </div>
+    <h1>Feelings Bloom</h1>
+    <p>Smiles turned into memories, and love bloomed with every heartbeat.</p>
+  </section>
+
+  <section class="scene3">
+    <div class="rose"></div>
+    <div class="photo-frame">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Romantic Moment" />
+    </div>
+    <h1>Silent Nights</h1>
+    <p>In quiet moments, love spoke louder than words.</p>
+  </section>
+
+  <section class="scene4">
+    <div class="rose"></div>
+    <div class="photo-frame">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e" alt="Forever Together" />
+    </div>
+    <h1>Forever Begins</h1>
+    <p>Two souls, one journey, and a lifetime of roses.</p>
+  </sec
+
+  <script>
+    const sections = document.querySelectorAll('section');
+
+    function revealOnScroll() {
+      const trigger = window.innerHeight * 0.6;
+
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < trigger) {
+          section.classList.add('active');
+          createPetals(6);
+        }
+      });
+    }
+
+    function createPetals(count) {
+      for (let i = 0; i < count; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = 5 + Math.random() * 5 + 's';
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 10000);
+      }
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+</body>
+</html>
